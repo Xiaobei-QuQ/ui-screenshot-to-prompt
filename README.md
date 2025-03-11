@@ -1,35 +1,38 @@
 # ui-screenshot-to-prompt
 
-ui-screenshot-to-prompt is an AI-powered tool that analyzes UI images to generate detailed prompts for AI coders. It uses computer vision and natural language processing to break down UI components, analyze design patterns, and create comprehensive descriptions for reproducing the design. Very useful for Bolt.new, v0 and other upcoming SaaS.
+> This is an improved version of [s-smits/ui-screenshot-to-prompt](https://github.com/s-smits/ui-screenshot-to-prompt). The main enhancement is replacing the original computer vision-based component detection with LLM (GPT-4V) for more intelligent detection, providing more accurate UI component recognition and analysis capabilities.
+
+ui-screenshot-to-prompt is an AI-powered tool that analyzes UI images to generate detailed prompts for AI coders. It uses OpenAI's Vision API to break down UI components, analyze design patterns, and create comprehensive descriptions for reproducing the design. Very useful for Bolt.new, v0 and other upcoming SaaS.
+
+## Key Improvements from Original Project
+
+- Replaced the original computer vision-based component detection method
+- Implemented GPT-4V for smarter component recognition and analysis
+- Rewrote the frontend using modern React tech stack
+- Enhanced prompt engineering for more accurate component descriptions
 
 ## Demo
 https://github.com/user-attachments/assets/79c2722e-942d-4f0c-84bd-11066b63f4c5
 
 ## Features
-- Smart image splitting and component detection
-- OCR for text extraction
+
+- Smart image analysis and component detection using LLM
 - UI element classification (buttons, text fields, checkboxes, etc.)
 - Individual component analysis
 - Overall design pattern analysis
-- Gradio web interface for easy usage
+- Modern React web interface for easy usage
 
 ## Detailed Usage Guide
 
-### Splitting Modes
+### Analysis Modes
 
-The tool offers two splitting modes for analyzing UI images:
+The tool uses LLM-based analysis for UI images:
 
-1. **Easy Mode**
-- Grid-based splitting of the image
-- Automatically determines optimal grid size based on image dimensions and aspect ratio (max 3x3)
-- Creates detailed spatial annotations that describe component placement and hierarchy within the interface layout
-
-2. **Advanced Mode** (Experimental)
-- Smart component detection using computer vision techniques
+1. **Component Detection**
+- Smart component detection using OpenAI Vision API
 - Identifies UI elements like buttons, text fields, and checkboxes
 - Includes visualization of detected components
 - Uses configurable minimum dimensions for component detection
-- Note: This mode is still experimental and may need improvements for optimal results
 
 ### Component Analysis
 
@@ -37,7 +40,8 @@ Each detected component is analyzed for:
 - Component type classification
 - Position and dimensions
 - Confidence score for detection
-- Location
+- Location and relationship with other components
+- Visual styling and design patterns
 
 ## Requirements
 
@@ -46,85 +50,72 @@ Each detected component is analyzed for:
 The tool requires:
 
 1. **OpenAI API**
-- Used for vision analysis; general analysis through GPT-4o and individual components through GPT-4o-mini
+- Used for vision analysis through GPT-4V
 - Required for component and design analysis
-
-2. **Anthropic/Openrouter API**
-- Used for creating detailed super prompts via Claude
-- Recommended for most accurate results
+- Supports custom API endpoints for proxy usage
 
 ### System Requirements
 
-- Python 3.10+
-- Rust (unfortunately for [tokenizers]([url](https://pypi.org/project/tokenizers/)) dependency)
-- Poetry (for dependency management)
+- Node.js 16+
+- npm or yarn
+- Modern web browser with JavaScript enabled
 
 ## Installation
 
 1. Clone the repository:
-```
-git clone https://github.com/s-smits/ui-screenshot-to-prompt.git
+```bash
+git clone https://github.com/yourusername/ui-screenshot-to-prompt.git
 cd ui-screenshot-to-prompt
 ```
 
-2. Install required system dependencies:
-
-For Unix-based systems (macOS/Linux):
-```
-# macOS (using Homebrew)
-brew install rust
-
-# Linux (Ubuntu/Debian)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
 ```
 
-3. Install Poetry if you haven't already:
-```
-curl -sSL https://install.python-poetry.org | python3 -
-```
-
-4. Install dependencies:
-```
-poetry install
+3. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-5. Set up environment variables:
-- Rename the `.env.example` file to `.env`:
-  ```
-  mv .env.example .env
-  ```
-- Open the `.env` file and replace the placeholder values with your actual API keys and URL:
-  ```
-  OPENAI_API_KEY=your_openai_api_key
-  
-  ANTHROPIC_API_KEY=your_anthropic_api_key
-  # OR
-  OPENROUTER_API_KEY=your_openrouter_api_key
-  ```
+4. Configure API settings:
+- Open the application in your browser
+- Navigate to the Settings tab
+- Enter your OpenAI API key
+- (Optional) Configure custom API endpoint if using a proxy
 
 ## Usage
 
-1. Activate the Poetry environment:
-```
-poetry shell
-```
+1. Open the application in your web browser (default: http://localhost:5173)
 
-2. Run the Gradio interface:
-```
-python src/ui-screenshot-to-prompt/main.py
-```
+2. Upload an image of a UI design:
+   - Click the upload area or drag and drop an image
+   - The tool will automatically analyze the image
 
-3. Open the provided URL in your web browser to access the Gradio interface.
-
-4. Upload an image of a UI design, and the tool will generate a detailed prompt for reproducing the design.
+3. View the analysis results:
+   - Main design patterns and choices
+   - Individual component breakdown
+   - Implementation suggestions
+   - Visual hierarchy assessment
 
 ## Configuration
 
-You can adjust various parameters in the `config.py` file, such as:
+You can adjust various parameters in the application settings:
 
-- System prompts
-- Vision analysis prompts
-- Super prompt template
+- OpenAI API endpoint
+- Vision API parameters
+- Component detection settings
+- Analysis detail level
+
+The tool uses several prompt templates for analysis:
+- System prompts for overall context
+- Vision analysis prompts for component detection
+- Design analysis prompts for pattern recognition
+- Super prompt template for final synthesis
 
 ## Contributing
 
@@ -136,9 +127,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- OpenAI for GPT models
-- OpenRouter for API access
-- Gradio for the web interface
-- Tesseract OCR for text extraction
-- 
+- OpenAI for GPT-4V model
+- React and TypeScript communities
+- Original Python version contributors
+
 [![Star History Chart](https://api.star-history.com/svg?repos=s-smits/ui-screenshot-to-prompt&type=Date)](https://star-history.com/#s-smits/ui-screenshot-to-prompt&Date)
