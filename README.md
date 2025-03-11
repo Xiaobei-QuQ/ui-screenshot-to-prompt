@@ -11,9 +11,6 @@ ui-screenshot-to-prompt is an AI-powered tool that analyzes UI images to generat
 - Rewrote the frontend using modern React tech stack
 - Enhanced prompt engineering for more accurate component descriptions
 
-## Demo
-https://github.com/user-attachments/assets/79c2722e-942d-4f0c-84bd-11066b63f4c5
-
 ## Features
 
 - Smart image analysis and component detection using LLM
